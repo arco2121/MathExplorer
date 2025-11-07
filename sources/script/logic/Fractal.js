@@ -136,17 +136,38 @@ class Fractal {
 }
 
 const defaultFractals = [
-    new Fractal((x, y, cx, cy) => [x * x - y * y + cx, 2 * x * y + cy]),
-    new Fractal((x, y, cx, cy) => [x * x - y * y + cx, 2 * Math.abs(x * y) + cy]),
-    new Fractal((x, y, cx, cy) => [Math.sin(x * cx) - Math.cos(y * cy), 2 * x * y + cy]),
-    new Fractal((x, y, cx, cy) => [x * x * x - 3 * x * y * y + cx, 3 * x * x * y - y * y * y + cy]),
-    new Fractal((x, y, cx, cy) => [1 - cx * x * x + y, cy * x]),
-    new Fractal((x, y, cx, cy) => [y, -cy * x + cx * y - y * y * y]),
-    new Fractal((x, y, cx, cy) => {
-        const r2 = x * x + y * y;
-        return [x * r2 - cx * cx, y * r2 - cy * cy];
+    new Fractal(),
+    new Fractal(function mand(x, y, cx, cy) {
+        return [x * x - y * y + cx, 2 * x * y + cy];
     }),
-    new Fractal((x, y, cx, cy) => [y + cy * Math.sin(x), x + cx * y])
+    new Fractal(function burning(x, y, cx, cy) {
+        return [x * x - y * y + cx, 2 * Math.abs(x * y) + cy];
+    }),
+    new Fractal(function feather(x, y, cx, cy) {
+        const zx = x,
+            zy = y;
+        const nx = zx * zx * zx - 3.0 * zx * zy * zy;
+        const ny = 3.0 * zx * zx * zy - zy * zy * zy;
+        const denom = 1.0 + zx * zx + zy * zy;
+        return [nx / denom + cx, ny / denom + cy];
+    }),
+    new Fractal(function henon(x, y, cx, cy) {
+        return [1.0 - cx * x * x + y, cy * x];
+    }),
+    new Fractal(function duffing(x, y, cx, cy) {
+        return [y, -cy * x + cx * y - y * y * y];
+    }),
+    new Fractal(function ikeda(x, y, cx, cy) {
+        const t = 0.4 - 6.0 / (1.0 + x * x + y * y);
+        const st = Math.sin(t),
+            ct = Math.cos(t);
+        return [1.0 + cx * (x * ct - y * st), cy * (x * st + y * ct)];
+    }),
+    new Fractal(function chirikov(x, y, cx, cy) {
+        y += cy * Math.sin(x);
+        x += cx * y;
+        return [x, y];
+    })
 ]
 
 window.Fractal = Fractal;

@@ -5,18 +5,15 @@ const modeSel = document.getElementById("mode")
 
 document.addEventListener("DOMContentLoaded", () => {
     if (!document.documentElement.getAttribute("default_fractal"))
+    {
         render_frame.contentWindow.postMessage({
             cmd: 'setFractalObjectDefault',
             fractal: document.documentElement.getAttribute("default_fractal")
         }, '*');
-})
-
-modeSel.addEventListener("change", () => {
-    mode = modeSel.value
-    render_frame.contentWindow.postMessage({
-        cmd: 'renderMode',
-        mode: mode
-    }, '*');
+        render_frame.contentWindow.postMessage({
+            cmd: 'start',
+        }, '*');
+    }
 })
 
 window.addEventListener("message",(ev) => {

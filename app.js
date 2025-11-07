@@ -71,6 +71,9 @@ const exc = (handler) => {
 app.get("/style",(req,res) => {
     res.sendFile(__dirname + "/sources/style/index.css")
 })
+app.get("/render_style",(req,res) => {
+    res.sendFile(__dirname + "/sources/style/render.css")
+})
 
 //Endpoint
 app.get(["/","/home","/index"],exc((req,res) => {
@@ -85,11 +88,11 @@ app.get("/view",exc((req,res) => {
     res.render("view")
 }))
 
-app.get("/render",exc((req,res) => {
+app.get("/render_fractal",exc((req,res) => {
     const from = req.headers["sec-fetch-dest"];
     if (from != "iframe") 
         return res.status(403).send("Not Authorized")
-    res.render("render");
+    res.render("render_fractal");
 }))
 //
 
