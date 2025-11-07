@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Explorer</title>
+    <link rel="stylesheet" href="/style">
+    <link rel="icon" href="/icon">
+</head>
+<body>
+    <ui>
+        <script src="./ui/navbar.js"></script>
+        <div class="full adapt">
+            <div>
+                <div>
+                    <h2>Math Explorer</h2>
+                    <h5>The place where you can visualize and listen to all sort of fractals, and even more</h5>
+                </div>
+                <row>
+                    <form action="/view" method="get">
+                        <select name="default">
+                            <option value="1">Mandelbrot</option>
+                            <option value="2">Burning Ship</option>
+                            <option value="3">Feather</option>
+                            <option value="4">SFX</option>
+                            <option value="5">Henon</option>
+                            <option value="6">Duffing</option>
+                            <option value="7">Ikeda</option>
+                            <option value="8">Chirikov</option>
+                        </select>
+                        <input type="submit" class="styleBt" value="Visualize">
+                    </form>
+                </row>
+            </div>
+            <div>
+                <img width="500" alt="fractal xample" src="https://img.itch.zone/aW1hZ2UvOTM1NzMzLzUzMTU0MzEucG5n/original/ay7ju0.png">
+            </div>
+        </div>
+        <script src="./ui/footer.js"></script>
+    </ui>
+    <script src="./script/startup.js"></script>
+</body>
+</html>

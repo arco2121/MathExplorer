@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+
+*:not(canvas)
+{
+    transition: all 0.2s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+    font-family: "Google Sans Code";
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: var(--opposite);
+    text-align: center;
+    overflow: hidden;
+    transform-origin: center center;
+    object-fit: cover;
+}
+
+/*Theme dark false / Theme light true*/
+:root[theme='true']
+{
+    --back: white;
+    --opposite: black;
+    nav object
+    {
+        filter: invert(100%);
+    }
+}
+:root[theme='false']
+{
+    --back: black;
+    --opposite: white;
+}
+:focus
+{
+    outline: none;
+}
+:root[ready="1"]
+{
+    body { animation: appear 0.5s ease forwards; }
+}
+
+/*Google font elements and animations*/
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 1000,
+  'GRAD' 300,
+  'opsz' 70
+}
+
+@keyframes appear {
+    0%
+    {
+        opacity: 0;
+        scale: 0.95;
+    }
+    50%
+    {
+        scale: 1.01;
+    }
+    100%
+    {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+/**/
+
+html
+{
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    height: 100%;
+}
+body
+{
+    opacity: 0;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    height: 100%;
+    background-color: var(--back);
+}
+h1,h2,h3,h4,h5
+{
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+    font-weight: 600;
+}
+h4,h5,h6
+{
+    font-weight: 400;
+}
+h3
+{
+    font-weight: 800;
+}
+a
+{
+    text-decoration: none;
+    font-weight: 800;
+    font-style: italic;
+}
+nav
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    border: solid var(--opposite) 3px;
+    border-radius: 20px;
+    margin: 15px 10px;
+}
+nav row
+{
+    margin: 0px 20px;
+    min-height: 70px;
+}
+object
+{
+    width: 200px;
+    height: auto;
+    pointer-events:none;
+}
+nav object
+{
+    width: 25px;
+}
+nav button
+{
+    display: flex;
+    background: transparent;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+nav:hover
+{
+    scale: 1.01;
+    filter: blur(0.5px);
+}
+img,button
+{
+    transition: all 0.2s ease;
+}
+img:active
+{
+    scale: 0.95;
+}
+nav img:active, button:active
+{
+    scale: 0.9;
+    filter:brightness(65%);
+}
+div, ui, row
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.full
+{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+.adapt
+{
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+ui
+{
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+row
+{
+    flex-direction: row;
+    gap: 25px;
+}
+div
+{
+    margin: 10px;
+}
+div img
+{
+    border-radius: 20px;
+    border: dashed var(--opposite) 5px;
+}
+footer
+{
+    margin-bottom: 10px;
+}
+.styleBt
+{
+    appearance: base-select;
+    width: fit-content;
+    padding: 7px;
+    border: dashed var(--opposite) 3px;
+    border-radius: 10px;
+    background-color: transparent;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    transition: all 0.2s ease;
+}
+.styleBt:active
+{
+    scale: 0.9;
+}
+canvas
+{
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+select
+{
+    appearance: base-select;
+    width: fit-content;
+    padding: 8px;
+    border: solid var(--opposite) 3px;
+    border-radius: 10px;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    min-width: 150px;
+    transition: 0.15s all ease;
+}
+select:active
+{
+    scale: 0.95;
+}
+::picker(select)
+{
+    appearance: base-select;
+    background-color: var(--back);
+    padding: 5px;
+    border: solid var(--opposite) 3px;
+    font-weight: 400;
+    border-radius: 10px;
+    margin: 5px;
+}
+select::picker-icon
+{
+    transition: 0.2s rotate ease;
+}
+select:open::picker-icon 
+{
+    rotate: 180deg;
+}
+@media (orientation: portrait) {
+    nav row h3
+    {
+        display: none;
+    }
+    nav:hover
+    {
+        scale: 1;
+        filter: blur(0px);
+    }
+    .full
+    {
+        flex-direction: column;
+    }
+    .adapt
+    {
+        flex-direction: column;
+    }
+    div img
+    {
+        max-width: 300px;
+        aspect-ratio: 1/1;
+    }
+}

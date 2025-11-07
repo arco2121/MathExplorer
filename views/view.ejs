@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" <%if(!locals.default)%>default_fractal="<%=locals.func%>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer</title>
+    <link rel="stylesheet" href="/style">
+    <link rel="icon" href="/icon">
+</head>
+<body>
+    <ui>
+        <script src="./ui/navbar.js"></script>
+        <div class="full adapt">
+            <iframe id="render_frame" src="/render" frameborder="0"></iframe>
+            <row>
+                <label>Render mode</label>
+                <select id="mode">
+                    <option value="1">CPU</option>
+                    <option value="2">GPU</option>
+                </select>
+            </row>
+        </div>
+        <script src="./ui/footer.js"></script>
+    </ui>
+    <script src="./script/startup.js"></script>
+    <script src="./script/viewer.js"></script>
+</body>
+</html>

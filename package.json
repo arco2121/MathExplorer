@@ -1,0 +1,27 @@
+{
+  "name": "mathexplorer",
+  "version": "1.0.0",
+  "description": "Porting of the original program (Fractal Sound Explorer by HackerPoet), also trying to make it a general Graphic viewer for Math functions",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arco2121/MathExplorer.git"
+  },
+  "author": "arco2121",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arco2121/MathExplorer/issues"
+  },
+  "homepage": "https://github.com/arco2121/MathExplorer#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.79.0",
+    "argon2": "^0.44.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  }
+}
