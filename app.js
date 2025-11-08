@@ -79,13 +79,15 @@ app.get("/render_style",(req,res) => {
 app.get(["/","/home","/index"],exc((req,res) => {
     res.render("index")
 }))
-
 app.get("/view",exc((req,res) => {
     if(!req.query.default)
         return res.render("view",{
             default : parseInt(req.query.default)
         });
     res.render("view")
+}))
+app.get("/upload",exc((req,res) => {
+    res.render("upload")
 }))
 
 app.get("/render_fractal",exc((req,res) => {
