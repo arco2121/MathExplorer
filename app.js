@@ -62,7 +62,7 @@ const exc = (handler) => {
         }
         catch (err) 
         {
-            res.render("error", {error : err})
+            res.render("error", {code : 200 , message : err})
         }
     }
 }
@@ -74,36 +74,43 @@ app.get("/style",(req,res) => {
 app.get("/render_style",(req,res) => {
     res.sendFile(__dirname + "/sources/style/render.css")
 })
-
+//
 //Endpoint
 app.get(["/","/home","/index"],exc((req,res) => {
     res.render("index")
 }))
 app.get("/view",exc((req,res) => {
-    if(!req.query.default)
+    if(req.query.default_element && req.query.type)
         return res.render("view",{
-            default : parseInt(req.query.default)
+            default_element : parseInt(req.query.default_element),
+            type : req.query.type
         });
     res.render("view")
 }))
 app.get("/upload",exc((req,res) => {
     res.render("upload")
 }))
-
-app.get("/render/:type",exc((req,res) => {
-    const type = req.params.type
+app.get("/hub", exc((req,res) => {
+    if(!req.query.urls)
+        return res.render("error", { code : 405, message : "Array of URLs not valid"})
+    res.render("hub", { rendering : req.query.urls })
+}))
+app.get("/render",exc((req,res) => {
     const from = req.headers["sec-fetch-dest"];
     if (from != "iframe") 
-        return res.status(403).send("Not Authorized")
-    switch(type)
-    {
-        case "fractal" : return res.render("render",{ type: type })
-        default : return res.status(403).send("Not Authorized")
-    }
+        return res.render("error", { code : 403, message : "Not Authorized"})
+    return res.render("render")
 }))
 //
 
-debug?
+app.use((req,res) => {
+    res.render("error", {
+        code : 404,
+        message : "Page not found or malformed request"
+    })
+})
+
+debug ?
     app.listen(port,debug_host,(err) => {
         console.log(err?err:"Server online : http://" + debug_host + ":" + port)
     }) :  

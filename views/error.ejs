@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error <%=locals.code%></title>
+    <link rel="stylesheet" href="/style">
+    <link rel="icon" href="./img/favicon.png">
+</head>
+<body>
+    <ui>
+        <script src="./ui/navbar.js"></script>
+        <div class="full adapt">
+            <div>
+                <div>
+                    <h2>Error <%=locals.code%></h2>
+                    <h5><%=locals.message%></h5>
+                </div>
+            </div>
+        </div>
+        <script src="./ui/footer.js"></script>
+    </ui>
+    <script src="./script/startup.js"></script>
+</body>
+</html>

@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" <%if(!locals.default)%>default_fractal="<%=locals.func%>">
+<html lang="en" <%if(locals.default_element) {%>
+        default_element="<%=locals.default_element%>"
+    <%}%>
+    <%if(locals.type) {%>
+        type="<%=locals.type%>"
+    <%}%>
+    >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +17,8 @@
     <ui>
         <script src="./ui/navbar.js"></script>
         <div class="full adapt">
-            <% if(!locals.default) { %>
-                <iframe id="render_frame" src="/render_fractal" frameborder="0"></iframe>
+            <% if(locals.default_element && locals.type) { %>
+                <iframe id="render_frame" src="/render" frameborder="0"></iframe>
                 <row>
                     <label for="mode">Render mode</label>
                     <select id="mode">

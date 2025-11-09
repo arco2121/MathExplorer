@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub</title>
+    <link rel="stylesheet" href="/style">
+    <link rel="icon" href="/img/favicon.png">
+</head>
+<body>
+    <ui>
+        <script src="/ui/navbar.js"></script>
+        <div class="full adapt">
+            <div>
+                <div>
+                    <h2>Opening the next element...</h2>
+                </div>
+            </div>
+        </div>
+        <script src="/ui/footer.js"></script>
+    </ui>
+    <script src="/script/startup.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            try {
+                const urlsData = '<%- rendering %>'
+                let renderings = JSON.parse(urlsData)
+                if(renderings.length > 0) {
+                    const first = renderings.shift()
+                    
+                    if(renderings.length > 0) {
+                        const params = new URLSearchParams({ 
+                            urls: JSON.stringify(renderings) 
+                        })
+                        window.open("/hub?" + params.toString(), "_blank")
+                    }
+                    location.href = first
+                }
+            } catch(e) {
+                console.error("Error parsing URLs:", e)
+                document.querySelector("h2").textContent = "Error parsing URLs"
+            }
+        })
+    </script>
+</body>
+</html>

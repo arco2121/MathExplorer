@@ -5,36 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload</title>
     <link rel="stylesheet" href="/style">
-    <link rel="icon" href="./img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
 </head>
 <body>
     <ui>
-        <script src="./ui/navbar.js"></script>
+        <script src="/ui/navbar.js"></script>
         <div class="full adapt">
             <div>
                 <div>
-                    <h2>Upload an element</h2>
-                    <h5>Chose a file that contains the element you wanna display</h5>
+                    <h2>Upload elements</h2>
+                    <h5>Chose the files that contains the elements you wanna display, or just drop them</h5>
                 </div>
                 <row>
-                    <lable for="typefile">Type of element:</lable>
+                    <lable for="typefile">Type of elements :</lable>
                     <select id="typefile">
                         <option value="fractal">Fractal</option>
                     </select>
                 </row>
             </div>
             <div>
-                <code id="view_input">
-                    <intr>./$></intr><func>choose_file</func>()<br><br>
-                    <intr>./$>choose_file$></intr><func>specify</func>(<params>.mexplo</params>,<params> .json</params>)<br><br>
-                    <intr>./$></intr><func>start</func>()
-                </code>
-                <input id="file_input" style="display: none;" type="file" accept=".json, .mexplo">
+                <container>
+                    <row class="start">
+                        <dot style="background-color: red;"></dot>
+                        <dot style="background-color: green;"></dot>
+                        <dot style="background-color: blueviolet;"></dot>
+                    </row>
+                    <code id="view_input">
+                        <intr>./$></intr><func>choose_file</func>()<br><br>
+                        <intr>./$>choose_file$></intr><func>specify</func>(<params>.mexplo</params>,<params> .json</params>)<br><br>
+                        <intr>./$></intr><func>start</func>()
+                    </code>
+                </container>
+                <input id="file_input" multiple="true" hidden type="file" accept=".json, .mexplo">
             </div>
         </div>
-        <script src="./ui/footer.js"></script>
+        <script src="/ui/footer.js"></script>
     </ui>
-    <script src="./script/startup.js"></script>
-    <script src="./script/uploader.js"></script>
+    <script src="/script/startup.js"></script>
+    <script src="/script/uploader.js"></script>
 </body>
 </html>
