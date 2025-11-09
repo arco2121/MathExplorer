@@ -229,6 +229,34 @@ select,input,button
 {
     cursor: pointer;
 }
+code
+{
+    border-radius: 15px;
+    background-color: var(--opposite);
+    color: var(--back);
+    padding: 20px;
+    text-align: start;
+    overflow-y: auto;
+    min-width: 400px;
+    max-width: 80%;
+    max-height: 350px;
+}
+code:active
+{
+    scale: 0.95;
+}
+intr
+{
+    color: red;
+}
+func
+{
+    color: green;
+}
+params
+{
+    color: blueviolet;
+}
 iframe
 {
     width: 700px;

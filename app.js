@@ -90,11 +90,16 @@ app.get("/upload",exc((req,res) => {
     res.render("upload")
 }))
 
-app.get("/render_fractal",exc((req,res) => {
+app.get("/render/:type",exc((req,res) => {
+    const type = req.params.type
     const from = req.headers["sec-fetch-dest"];
     if (from != "iframe") 
         return res.status(403).send("Not Authorized")
-    res.render("render_fractal");
+    switch(type)
+    {
+        case "fractal" : return res.render("render",{ type: type })
+        default : return res.status(403).send("Not Authorized")
+    }
 }))
 //
 

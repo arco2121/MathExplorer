@@ -14,21 +14,27 @@
             <div>
                 <div>
                     <h2>Upload an element</h2>
-                    <h5>Chose a file that contains the element you wanna display <kbd>(.mexploer files)</kbd></h5>
+                    <h5>Chose a file that contains the element you wanna display</h5>
                 </div>
                 <row>
-                    <lable for="typefile">Type of element :</lable>
+                    <lable for="typefile">Type of element:</lable>
                     <select id="typefile">
-                        <option value="fractal">Fractal file</option>
+                        <option value="fractal">Fractal</option>
                     </select>
                 </row>
             </div>
             <div>
-                <input type="file" accept=".json, .mexplorer">
+                <code id="view_input">
+                    <intr>./$></intr><func>choose_file</func>()<br><br>
+                    <intr>./$>choose_file$></intr><func>specify</func>(<params>.mexplo</params>,<params> .json</params>)<br><br>
+                    <intr>./$></intr><func>start</func>()
+                </code>
+                <input id="file_input" style="display: none;" type="file" accept=".json, .mexplo">
             </div>
         </div>
         <script src="./ui/footer.js"></script>
     </ui>
     <script src="./script/startup.js"></script>
+    <script src="./script/uploader.js"></script>
 </body>
 </html>
