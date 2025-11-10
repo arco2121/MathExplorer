@@ -1,7 +1,7 @@
 document.body.querySelector("ui").innerHTML += `
 <nav>
     <row>
-        <img onclick="location.href = '/'" width="30" src="./img/favicon.png">
+        <button onclick="location.href='/'"><object type="image/svg+xml" data="./img/favicon.svg"></object></button>
         <h3>Math Explorer</h3>
     </row>
     <row>

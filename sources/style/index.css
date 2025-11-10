@@ -2,7 +2,7 @@
 
 *:not(canvas)
 {
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
     user-select: none;
     -webkit-user-drag: none;
     font-family: "Google Sans Code";
@@ -10,7 +10,6 @@
     font-style: normal;
     color: var(--opposite);
     text-align: center;
-    transform-origin: center center;
     object-fit: cover;
     -webkit-tap-highlight-color: transparent;
 }
@@ -24,6 +23,9 @@
 {
     --back: white;
     --opposite: black;
+    --code_root: red;
+    --code_function: limegreen;
+    --code_message: magenta;
     nav object
     {
         filter: invert(100%);
@@ -33,10 +35,9 @@
 {
     --back: black;
     --opposite: white;
-    nav img
-    {
-        filter: invert(100%);
-    }
+    --code_root: crimson;
+    --code_function: green;
+    --code_message: blueviolet;
 }
 :focus
 {
@@ -70,6 +71,22 @@
     {
         opacity: 1;
         scale: 1;
+    }
+}
+@keyframes disappear {
+    0%
+    {
+        opacity: 1;
+        scale: 1;
+    }
+    50%
+    {
+        scale: 1.01;
+    }
+    100%
+    {
+        opacity: 0;
+        scale: 0.95;
     }
 }
 
@@ -123,6 +140,15 @@ dot
     border-radius: 50%;
     display: inline-block;
     margin: 15px 0px 0px 20px;
+    cursor: pointer;
+}
+dot:hover
+{
+    scale: 1.1;
+}
+dot:active
+{
+    scale: 0.95;
 }
 .start
 {
@@ -144,6 +170,8 @@ container
     min-height: 200px;
     max-width: 400px;
     max-height: 350px;
+    transition: all 0.3s ease;
+    z-index: 2;
 }
 .dragover
 {
@@ -162,6 +190,8 @@ code
     text-overflow: ellipsis;
     margin: 15px;
     cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 3;
 }
 code:active
 {
@@ -231,11 +261,6 @@ div, ui, row
     align-items: center;
     justify-content: space-around;
 }
-.full
-{
-    width: 100%;
-    height: 100%;
-}
 .adapt
 {
     flex-direction: row;
@@ -248,6 +273,7 @@ ui
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    z-index: 1;
     overflow-x: hidden;
 }
 row
@@ -292,16 +318,16 @@ select,input,button, nav img
 }
 intr
 {
-    color: red;
+    color: var(--code_root);
 }
 func
 {
-    color: green;
+    color: var(--code_function);
     word-break: keep-all;
 }
 params
 {
-    color: blueviolet;
+    color: var(--code_message);
     word-break: keep-all;
 }
 iframe
@@ -351,6 +377,29 @@ optgroup
 {
     font-weight: 800;
 }
+.full
+{
+    width: 100%;
+    height: 100%;
+}
+.fullscreen 
+{
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    border: solid var(--back) 3px;
+    z-index: 2;
+    transition: none;
+}
+.fullscreen-mid
+{
+    height: 90%;
+}
 @media (orientation: portrait) {
     nav row h3
     {
@@ -385,5 +434,11 @@ optgroup
         width: 80%;
         min-height: 0px;
         min-width: 300px;
+    }
+}
+@media (max-height: 300px) {
+    .full
+    {
+        height: auto;
     }
 }

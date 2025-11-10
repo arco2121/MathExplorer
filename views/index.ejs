@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Explorer</title>
     <link rel="stylesheet" href="/style">
-    <link rel="icon" href="/img/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/img/icon.svg">
 </head>
 <body>
     <ui>
@@ -20,14 +20,14 @@
                     <select id="elementtoselect">
                         <option value="">Select something</option>
                         <optgroup label="Fractals">
-                            <option value="[1,'fractal']">Mandelbrot</option>
-                            <option value="[2,'fractal']">Burning Ship</option>
-                            <option value="[3,'fractal']">Feather</option>
-                            <option value="[4,'fractal']">SFX</option>
-                            <option value="[5,'fractal']">Henon</option>
-                            <option value="[6,'fractal']">Duffing</option>
-                            <option value="[7,'fractal']">Ikeda</option>
-                            <option value="[8,'fractal']">Chirikov</option>
+                            <option value="1,fractal">Mandelbrot</option>
+                            <option value="2,fractal">Burning Ship</option>
+                            <option value="3,fractal">Feather</option>
+                            <option value="4,fractal">SFX</option>
+                            <option value="5,fractal">Henon</option>
+                            <option value="6,fractal">Duffing</option>
+                            <option value="7,fractal">Ikeda</option>
+                            <option value="8,fractal">Chirikov</option>
                         </optgroup>
                     </select>
                     <button id="bt" class="styleBt">Visualize</button>
@@ -46,7 +46,7 @@
         bt.addEventListener("click", () => {
             if(sele.value == "")
                 return
-            const values = JSON.parse(sele.value)
+            const values = sele.value.trim().split(",")
             const url = "/view?default_element=" + values[0] + "&type=" + values[1]
             location.href = url
         })

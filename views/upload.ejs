@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload</title>
     <link rel="stylesheet" href="/style">
-    <link rel="icon" href="/img/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/img/icon.svg">
 </head>
 <body>
     <ui>
@@ -23,12 +23,12 @@
                     </select>
                 </row>
             </div>
-            <div>
-                <container>
+            <div id="root_code">
+                <container id="windo">
                     <row class="start">
-                        <dot style="background-color: red;"></dot>
-                        <dot style="background-color: green;"></dot>
-                        <dot style="background-color: blueviolet;"></dot>
+                        <dot style="background-color: var(--code_root)"></dot>
+                        <dot style="background-color: var(--code_function);"></dot>
+                        <dot style="background-color:  var(--code_message);"></dot>
                     </row>
                     <code id="view_input">
                         <intr>./$></intr><func>choose_file</func>()<br><br>

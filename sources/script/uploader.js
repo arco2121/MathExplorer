@@ -1,6 +1,9 @@
 const input = document.getElementById("file_input")
 const view = document.getElementById("view_input")
 const typef = document.getElementById("typefile")
+const dots = document.querySelectorAll("dot")
+const tab = document.getElementById("windo")
+const code_root = document.getElementById("root_code")
 const notvalidcode = (mess, nb = "") => {
     return `${nb==""?"":"<br><br>"}
     <intr>./$></intr><func>output</func>()<br><br>
@@ -123,6 +126,12 @@ view.addEventListener("drop", async(e) => {
 
 input.addEventListener("change", async(e) => {
     await manageFiles(input.files,e)
+})
+dots.forEach(dot => {
+    dot.addEventListener("click", async() => {
+        tab.classList.toggle('fullscreen');
+        view.classList.toggle('fullscreen-mid');
+    })
 })
 input.addEventListener("cancel", () => {
     view.innerHTML = cancelcode
