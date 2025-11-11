@@ -322,7 +322,7 @@ div img
     border-radius: 20px;
     border: dashed var(--opposite) 5px;
 }
-foot
+footer
 {
     margin-bottom: 10px;
 }
@@ -479,6 +479,12 @@ container
     }
 }
 @media (max-height: 470px) {
+    .full
+    {
+        height: auto;
+    }
+}
+@media (orientation: portrait) and (max-height: 550px) {
     .full
     {
         height: auto;

@@ -1,9 +1,11 @@
-const debug = false
-const changeTheme = () => {
-    if (debug) console.log("Status: " + !localStorage.getItem("theme"))
-    const stat = localStorage.getItem("theme") == "true" ? false : true
-    localStorage.setItem("theme", stat)
-    document.documentElement.setAttribute("theme", localStorage.getItem("theme"))
+const debug = true
+const changeTheme = async() => {
+    const newSave = JSON.parse(localStorage.getItem("MathExplorerSettings"))
+    const stat = newSave['theme_light'] === true ? false : true  // ← rimuovi le virgolette
+    newSave['theme_light'] = stat
+    localStorage.setItem("MathExplorerSettings",JSON.stringify(newSave)) 
+    await wait(10)
+    document.documentElement.setAttribute("theme", newSave['theme_light'])
 }
 const wait = async (time) => { return await new Promise(resolve => setTimeout(resolve, time)) }
 const manageFullScreen = async (element, subElement = null, time = 100, blurValue = "2px", towards = false) => {
@@ -79,13 +81,24 @@ const manageFullScreen = async (element, subElement = null, time = 100, blurValu
 }
 /*StartUp*/
 document.addEventListener("DOMContentLoaded", async() => {
-    if (!localStorage.getItem("theme"))
-        localStorage.setItem("theme", false)
-    document.documentElement.setAttribute("theme", localStorage.getItem("theme"))
+    if (!localStorage.getItem("MathExplorerSettings"))
+        localStorage.setItem("MathExplorerSettings",JSON.stringify({ theme_light : false })) 
+    let statu = JSON.parse(localStorage.getItem("MathExplorerSettings"))
+    if(!statu['theme_light'])
+    {
+        const newSave = JSON.parse(localStorage.getItem("MathExplorerSettings"))
+        newSave['theme_light'] = false 
+        localStorage.setItem("MathExplorerSettings",JSON.stringify(newSave)) 
+    }
+    statu = JSON.parse(localStorage.getItem("MathExplorerSettings"))
+    const status = statu['theme_light']
+    document.documentElement.setAttribute("theme", status)
     await wait(300)
     document.documentElement.setAttribute("ready", 1)
 })
-document.getElementById("colorthemeBt").addEventListener("click", () => {
-    if (debug) console.log("Status: " + !localStorage.getItem("theme"))
-    changeTheme()
+document.getElementById("colorthemeBt").addEventListener("click", async() => {
+    const statu = JSON.parse(localStorage.getItem("MathExplorerSettings"))
+    const status = statu['theme_light']
+    if (debug) console.log("Status: " + status)
+    await changeTheme()
 })
