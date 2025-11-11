@@ -2,7 +2,7 @@
 
 *:not(canvas)
 {
-    transition: all 0.2s ease;
+    transition: all var(--timing) ease;
     user-select: none;
     -webkit-user-drag: none;
     font-family: "Google Sans Code";
@@ -26,7 +26,7 @@
     --code_root: red;
     --code_function: limegreen;
     --code_message: magenta;
-    nav object
+    .dot object
     {
         filter: invert(100%);
     }
@@ -38,6 +38,10 @@
     --code_root: crimson;
     --code_function: green;
     --code_message: blueviolet;
+    nav object
+    {
+        filter: invert(100%);
+    }
 }
 :focus
 {
@@ -45,7 +49,10 @@
 }
 :root[ready="1"]
 {
-    body { animation: appear 0.5s ease forwards; }
+    --timing : 0.3s;
+    --more_timing : 0.45s;
+    --halftime : 0.2s;
+    body { animation: appear var(--more_timing) ease forwards; }
 }
 
 /*Google font elements and animations*/
@@ -58,38 +65,72 @@
 }
 
 @keyframes appear {
-    0%
-    {
+    0%{
         opacity: 0;
         scale: 0.95;
     }
-    50%
-    {
+    50%{
         scale: 1.01;
     }
-    100%
-    {
+    100%{
         opacity: 1;
         scale: 1;
     }
 }
 @keyframes disappear {
-    0%
-    {
+    0%{
         opacity: 1;
         scale: 1;
     }
-    50%
-    {
+    50%{
         scale: 1.01;
     }
-    100%
-    {
+    100%{
         opacity: 0;
         scale: 0.95;
     }
 }
-
+@keyframes expandFullscreen {
+    from {
+        top: var(--start-top);
+        left: var(--start-left);
+        width: var(--start-width);
+        height: var(--start-height);
+        transform: none;
+        border-radius: 15px;
+    }
+    to {
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        border-radius: 0px;
+    }
+}
+@keyframes collapseFullscreen {
+    from {
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        border-radius: 0px;
+    }
+    to {
+        top: var(--start-top);
+        left: var(--start-left);
+        width: var(--start-width);
+        height: var(--start-height);
+        transform: none;
+        border-radius: 15px;
+    }
+}
+@keyframes bounceBack {
+    0%   { scale: 1; }
+    50%  { scale: 1.02; }
+    100% { scale: 1;}
+}
 /**/
 
 html
@@ -133,22 +174,39 @@ a
     font-weight: 800;
     font-style: italic;
 }
-dot
+.dot
 {
-    height: 15px;
+    height: 20px;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    display: inline-block;
-    margin: 15px 0px 0px 20px;
+    margin: 10px 0px 0px 15px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    position: relative;
 }
-dot:hover
+.dot svg
 {
-    scale: 1.1;
+    height: auto;
+    aspect-ratio: 1/1;
+    display: flex;
+    transform-origin: center center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
-dot:active
+.dot object
 {
-    scale: 0.95;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+.dot:active
+{
+    scale: 0.9;
 }
 .start
 {
@@ -156,26 +214,9 @@ dot:active
     width: 100%;
     gap: 0px;
 }
-container
-{
-    background-color: var(--back);
-    border: solid var(--opposite) 3px;
-    border-radius: 15px;
-    height: auto;
-    width: auto;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 400px;
-    min-height: 200px;
-    max-width: 400px;
-    max-height: 350px;
-    transition: all 0.3s ease;
-    z-index: 2;
-}
 .dragover
 {
-    scale: 1.03;
+    scale: 1.02;
 }
 code
 {
@@ -184,13 +225,13 @@ code
     color: var(--back);
     padding: 10px;
     text-align: left;
-    align-content: center;
-    overflow-y: auto;
+    align-items: flex-start;
+    overflow: auto;
     line-height: 30px;
-    text-overflow: ellipsis;
     margin: 15px;
+    text-rendering: optimizeLegibility;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all var(--halftime) ease;
     z-index: 3;
 }
 code:active
@@ -228,22 +269,13 @@ nav object
 {
     width: 25px;
 }
-nav button
+button
 {
     display: flex;
     background: transparent;
-    border: 0;
+    border: none;
     margin: 0;
     padding: 0;
-}
-nav:hover
-{
-    scale: 1.01;
-    filter: blur(0.5px);
-}
-img,button
-{
-    transition: all 0.2s ease;
 }
 img:active
 {
@@ -290,7 +322,7 @@ div img
     border-radius: 20px;
     border: dashed var(--opposite) 5px;
 }
-footer
+foot
 {
     margin-bottom: 10px;
 }
@@ -306,7 +338,6 @@ footer
     font-size: 14px;
     font-weight: 600;
     font-style: normal;
-    transition: all 0.2s ease;
 }
 .styleBt:active
 {
@@ -328,7 +359,7 @@ func
 params
 {
     color: var(--code_message);
-    word-break: keep-all;
+    word-break: normal;
 }
 iframe
 {
@@ -349,7 +380,6 @@ select
     font-size: 14px;
     font-weight: 800;
     min-width: 150px;
-    transition: 0.15s all ease;
 }
 select:active
 {
@@ -367,7 +397,7 @@ select:active
 }
 select::picker-icon
 {
-    transition: 0.2s rotate ease;
+    transition: var(--timing) rotate ease;
 }
 select:open::picker-icon 
 {
@@ -382,19 +412,36 @@ optgroup
     width: 100%;
     height: 100%;
 }
+container
+{
+    background-color: var(--back);
+    border: solid var(--opposite) 3px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 400px;
+    min-height: 200px;
+    max-width: 400px;
+    max-height: 350px;
+    transition: all var(--halftime) ease-out;
+    z-index: 2;
+    position: relative;
+}
 .fullscreen 
 {
-    position: fixed;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    max-height: none !important;
     border: solid var(--back) 3px;
-    z-index: 2;
-    transition: none;
+    z-index: 3;
+    transition: all var(--halftime) ease-in;
+}
+.fullscreen-placeholder 
+{
+    visibility: hidden;
+    pointer-events: none;
+}
+.fullscreen-bounce 
+{
+    animation: bounceBack var(--halftime) ease;
 }
 .fullscreen-mid
 {
@@ -404,11 +451,6 @@ optgroup
     nav row h3
     {
         display: none;
-    }
-    nav:hover
-    {
-        scale: 1;
-        filter: blur(0px);
     }
     .full
     {
@@ -436,9 +478,25 @@ optgroup
         min-width: 300px;
     }
 }
-@media (max-height: 300px) {
+@media (max-height: 470px) {
     .full
     {
         height: auto;
+    }
+}
+@media (hover: hover)
+{
+    .dot:hover
+    {
+        scale: 1.1;
+    }
+    nav:hover
+    {
+        scale: 1.01;
+        filter: blur(0.5px);
+    }
+    container:not(.fullscreen):hover
+    {
+        scale: 1.02;
     }
 }
