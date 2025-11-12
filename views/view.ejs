@@ -18,14 +18,45 @@
         <script src="./ui/navbar.js"></script>
         <div class="full adapt">
             <% if(locals.default_element && locals.type) { %>
-                <iframe id="render_frame" src="/render" frameborder="0"></iframe>
-                <row>
-                    <label for="mode">Render mode</label>
-                    <select id="mode">
-                        <option value="1">CPU</option>
-                        <option value="2">GPU</option>
-                    </select>
-                </row>
+                <div class="render_cont">
+                    <iframe id="render_frame" src="/render" frameborder="0"></iframe>
+                    <row class="floatBar">
+                        <button class="styleBt floatBt" style="background-color:  var(--code_message);" id="screenshot">
+                            <object data="/img/screenshot.svg" type="image/svg+xml"></object>
+                        </button>
+                        <%if(locals.type == "fractal") {%>
+                            <button class="styleBt floatBt fixBt" style="background-color: var(--code_message);" id="zoom-out"><h6>Julia</h6></button>
+                        <%}%>
+                        <row>
+                            <button class="styleBt floatBt" style="background-color:  var(--code_root);" id="screenshot">
+                                <object data="/img/add.svg" type="image/svg+xml"></object>
+                            </button>
+                            <button class="styleBt floatBt" style="background-color:  var(--code_function);" id="screenshot">
+                                <object data="/img/minus.svg" type="image/svg+xml"></object>
+                            </button>                        
+                        </row>
+                    </row>
+                </div>
+                <div class="viewSettings">
+                    <row>
+                        <label for="mode">Render mode:</label>
+                        <select id="mode">
+                            <option value="1">CPU</option>
+                            <option value="2">GPU</option>
+                        </select>
+                    </row>
+                    <row>
+                        <label for="autorender">Autorendering:</label>
+                        <select id="autorender">
+                            <option value="1">Auto</option>
+                            <option value="2">Manual</option>
+                        </select>
+                    </row>
+                    <row>
+                        <button id="sound" class="styleBt">Sound: On</button>
+                        <button id="forceRender" class="styleBt">Rerender</button>
+                    </row>
+                </div>
             <%} else { %>
                 <h2>Nothing to render</h2>
             <% } %>

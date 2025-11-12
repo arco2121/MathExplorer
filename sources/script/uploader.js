@@ -4,6 +4,7 @@ const typef = document.getElementById("typefile")
 const dots = document.querySelectorAll(".dot")
 const tab = document.getElementById("windo")
 const code_root = document.getElementById("root_code")
+const fileReader = new FileReader()
 const notvalidcode = (mess, nb = "") => {
     return `${nb==""?"":"<br><br>"}
     <intr>./$></intr><func>output</func>()<br><br>
@@ -31,6 +32,44 @@ const dragcode = `
 <intr>./$>choose_file$></intr><func>specify</func>(<params>.mexplo</params>,<params> .json</params>)<br><br>
 <intr>./$></intr><func>start_drag</func>()
 `
+const loadFile = async(file, typeOut) => await new Promise((resolve) => {
+    switch(typeOut)
+    {
+        case "text" : {
+            fileReader.readAsText(file)
+            fileReader.addEventListener("load", () => { resolve(fileReader.result.toString()); },{
+                once : true
+            })
+            fileReader.addEventListener("abort", () => { throw new Error("File reading failed")},{
+                once : true
+            })
+            break;
+        }
+        case "array" : {
+            fileReader.readAsArrayBuffer(file)
+            fileReader.addEventListener("load", () => { resolve(Array.from(fileReader.result)); },{
+                once : true
+            })
+            fileReader.addEventListener("abort", () => { throw new Error("File reading failed")},{
+                once : true
+            })
+            break;
+        }
+        case "JSON" : {
+            fileReader.readAsText(file)
+            fileReader.addEventListener("load", () => { resolve(JSON.parse(fileReader.result)); },{
+                once : true
+            })
+            fileReader.addEventListener("abort", () => { throw new Error("File reading failed")},{
+                once : true
+            })
+            break;
+        }
+        default : {
+            throw new Error("TypeOut not valid")
+        }
+    }
+})
 const manageFiles = async (files, event) => {
     event.preventDefault()
     view.innerHTML = initialcode
@@ -42,12 +81,13 @@ const manageFiles = async (files, event) => {
             view.innerHTML += notvalidcode("File type not valid", file.name)
             continue
         }
-        const contentFile = await new Promise((resolve, reject) => {
-            const reader = new FileReader()
-            reader.onload = (e) => resolve(e.target.result)
-            reader.onerror = reject
-            reader.readAsText(file)
-        })
+        let contentFile;
+        try{
+            contentFile = await loadFile(file,"JSON")
+        }catch{
+            view.innerHTML += notvalidcode("Error reading file, or empty", file.name)
+            continue
+        }
         console.log(contentFile)
         if (!contentFile) {
             view.innerHTML += notvalidcode("Error reading file, or empty", file.name)
@@ -60,7 +100,6 @@ const manageFiles = async (files, event) => {
                     const link = "/view?from_file=" + encodeURIComponent(fractaltorender
                     .toJSON()) + "&type=fractal"
                     renderings.push(link)
-                    console.log(fractaltorender)
                 } catch (e) {
                     view.innerHTML += notvalidcode("Error parsing file's content as selected type", file.name)
                 }
@@ -134,6 +173,7 @@ dots[1].addEventListener("click", () => {
     manageFullScreen(tab, view, 200, 2.5, true)
 })
 dots[2].addEventListener("click", () => {
+    if(fileReader.readyState == 1) fileReader.dispatchEvent("abort")
     renderings = []
     view.innerHTML = initialcode
 })

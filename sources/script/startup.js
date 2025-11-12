@@ -9,13 +9,13 @@ const changeTheme = async() => {
 }
 const wait = async (time) => { return await new Promise(resolve => setTimeout(resolve, time)) }
 const manageFullScreen = async (element, subElement = null, time = 100, blurValue = "2px", towards = false) => {
-    if ((!element.classList.contains("fullscreen") && !subElement.classList.contains("fullscreen-mid")) && towards) {
+    if ((!element.classList.contains("fullscreen")) && towards) {
         const rect = element.getBoundingClientRect()
         const placeholder = document.createElement('div')
         placeholder.style.width = rect.width + 'px'
         placeholder.style.height = rect.height + 'px'
         placeholder.style.minHeight = rect.height + 'px'
-        placeholder.style.margin = "10px"
+        placeholder.style.margin = "25px"
         placeholder.className = 'fullscreen-placeholder'
         element.parentNode.insertBefore(placeholder, element)
         element.dataset.placeholderId = 'placeholder-' + Date.now()
@@ -37,7 +37,6 @@ const manageFullScreen = async (element, subElement = null, time = 100, blurValu
         element.style.border = "solid var(--back) 3px"
         element.style.filter = "blur(" + blurValue + "px)"
         element.offsetHeight
-        subElement.classList.add('fullscreen-mid')
         element.classList.add('fullscreen')
         requestAnimationFrame(() => {
             element.style.top = '50%'
@@ -52,7 +51,7 @@ const manageFullScreen = async (element, subElement = null, time = 100, blurValu
             subElement.classList.remove('fullscreen-bounce')
         }, { once: true })
         element.style.filter = "blur(0px)"
-    } else if((element.classList.contains("fullscreen") && subElement.classList.contains("fullscreen-mid")) && !towards) {
+    } else if((element.classList.contains("fullscreen")) && !towards) {
         element.classList.remove('fullscreen')
         element.style.top = element.dataset.originalTop + 'px'
         element.style.left = element.dataset.originalLeft + 'px'
@@ -68,7 +67,6 @@ const manageFullScreen = async (element, subElement = null, time = 100, blurValu
             element.classList.remove('fullscreen-bounce')
         }, { once: true })
         element.style.filter = "blur(0px)"
-        subElement.classList.remove('fullscreen-mid')
         const placeholder = document.getElementById(element.dataset.placeholderId)
         if (placeholder) placeholder.remove()
         element.style.cssText = ''
