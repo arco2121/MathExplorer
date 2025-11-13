@@ -1,6 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+:root[theme='true']
+{
+    --grid: #000000bb;
+    --grid-light: #1f1919b9;
+    --axis: #000000;
+    --axis-light: #1f1919;
+}
+:root[theme='false']
+{
+    --grid: #ffffffd2;
+    --grid-light: #d2d2d2c8;
+    --axis: #ffffff;
+    --axis-light: #d2d2d2;
+}
+:root
+{
+    --font: "Google Sans Code";
+}
+*
+{
+    transition: all 0.15s ease;
+}
 html, body
 {
     width: 100%;
     height: 100%;
     margin: 0 auto;
+    overflow: hidden;
+}
+canvas
+{
+    width: 100%;
+    height: 100%;
 }

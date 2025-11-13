@@ -1,7 +1,7 @@
 const debug = true
 const changeTheme = async() => {
     const newSave = JSON.parse(localStorage.getItem("MathExplorerSettings"))
-    const stat = newSave['theme_light'] === true ? false : true  // ← rimuovi le virgolette
+    const stat = newSave['theme_light'] === true ? false : true
     newSave['theme_light'] = stat
     localStorage.setItem("MathExplorerSettings",JSON.stringify(newSave)) 
     await wait(10)
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     await wait(300)
     document.documentElement.setAttribute("ready", 1)
 })
-document.getElementById("colorthemeBt").addEventListener("click", async() => {
+document.getElementById("colorthemeBt")?.addEventListener("click", async() => {
     const statu = JSON.parse(localStorage.getItem("MathExplorerSettings"))
     const status = statu['theme_light']
     if (debug) console.log("Status: " + status)
