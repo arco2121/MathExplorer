@@ -368,15 +368,6 @@ params
     color: var(--code_message);
     word-break: normal;
 }
-iframe
-{
-    width: 95%;
-    margin: 10px;
-    height: auto;
-    aspect-ratio: 16/9;
-    border: dashed var(--opposite) 3px;
-    border-radius: 15px;
-}
 select
 {
     appearance: base-select;
